@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# dnf - a script to tranlsate dnf to apt for Ubuntu/Debian
+# Just forwards commands and flags to apt without any emulation
+
+case "$1" in
+    install|remove|erase|update|upgrade|autoremove|list|info|search|clean)
+        sudo apt "$@"
+        ;;
+    help|--help|-h)
+        echo "dnf is a simple wrapper for apt."
+        echo "Usage: dnf <apt-command> [options]"
+        echo "Examples: install, remove, update, upgrade, autoremove, list, info, search, clean"
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo "Use 'dnf help' for usage."
+        exit 1
+        ;;
+esac
